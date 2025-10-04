@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agro Data</title>
+    <link rel="stylesheet" href="/static/style_fnn.css">
+</head>
+
+<body>
+    <header>
+        <h1>Agro Data</h1>
+    </header>
+    <main>
+        <img src="/static/assets/img_verde.png" alt="Fazendeira e plantação na cor verde">
+        <div class="container_form">
+            <form action="/log/soil_data" method="post">
+                <div class="campos">
+                    <label for="rendimento_alvo">Rendimento alvo (1-0)</label>
+                    <input type="number" id="rendimento_alvo" name="rendimento_alvo" required>
+                </div>
+                <div class="campos">
+                    <label for="precipitacao">Precipitação</label>
+                    <input type="number" id="precipitacao" name="precipitacao" required>
+                </div>
+                <div class="campos">
+                    <label for="temperatura_max">Temperatura máxima (ºC)</label>
+                    <input type="number" id="temperatura_max" name="temperatura_max" required>
+                </div>
+                <div class="campos">
+                    <label for="temperatura_min">Temperatura mínima (ºC)</label>
+                    <input type="number" id="temperatura_min" name="temperatura_min" required>
+                </div>
+                <div class="campos">
+                    <label for="elevacao">Elevação</label>
+                    <input type="number" id="elevacao" name="elevacao" required>
+                </div>
+
+
+                <button type="submit">Enviar dados</button>
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 AgroData</p>
+    </footer>
+
+</body>
+
+</html>

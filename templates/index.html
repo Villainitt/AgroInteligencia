@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo ao Agro Data</title>
+    <link rel="stylesheet" href="/static/style_index.css">
+    <script src="https://kit.fontawesome.com/d09fdd387e.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Agro Data</h1>
+        <nav>
+            <li>
+                <a href="#apresentacao">Sobre</a>
+            </li>
+            <li>
+                <a href="#ferramentas">Ferramentas</a>
+            </li>
+
+        </nav>
+    </header>
+    <img src="/static/assets/img_rapaz_verde.png" alt="">
+    <main>
+        <section class="apresentacao" id="apresentacao">
+            <h1>Bem-vindo à Plataforma Agro Data</h1>
+            <h2>Inteligência artificial aplicada ao negócio</h2>
+            <p>Colete dados de campo, classifique imagens da sua lavoura e organize tudo de forma simples e eficiente
+                para
+                alimentar seus modelos de análise.</p>
+        </section>
+
+        <section class="ferramentas" id="ferramentas">
+            <p>Selecione a ferramenta que deseja utilizar:</p>
+            <nav>
+                <li>
+                    <a href="{{ url_for('fnn_bp.inserir_soil_data') }}"><i class="fa-solid fa-chart-line"></i> Ingestão
+                        de Dados do Solo</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('cnn_bp.classificar_imagens')}}"><i class="fa-solid fa-seedling"></i>
+                        Classificador de saúde das folhagens</a>
+                </li>
+                <li>
+                    <a href=""><i class="fa-solid fa-clipboard-list"></i> Adicionar notas</a>
+                </li>
+
+            </nav>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 AgroData</p>
+    </footer>
+
+
+</body>
+
+</html>

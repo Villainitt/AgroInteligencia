@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #1E1E1E;
+    
+}
+
+
+header {
+    position: fixed;
+    padding: 1rem;
+    width: 100%;
+    font-family: "Poppins", sans-serif;
+    background-color: #121212;
+    color: #E0E0E0;
+    display: flex;
+    justify-content: space-around;
+}
+
+nav {
+    align-items: center;
+    display: flex;
+    gap: 50px
+}
+
+header li {
+    list-style: none;
+}
+
+header li a {
+    text-decoration: none;
+    color: #E0E0E0;
+    font-weight: bold;
+    border-bottom: solid 2px transparent;
+}
+
+header li a:hover {
+    border-color: #4CAF50;
+    transition: all 0.5s;
+}
+
+
+img {
+    position: absolute;
+    z-index: -1;
+    top: 10%;
+    right: 0.1%;
+    width: 600px;
+}
+
+.apresentacao {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    font-family: "Inter", sans-serif;
+    font-size: 30px;
+    color: #E0E0E0;
+    padding: 3rem;
+    height: 600px;
+    width: 900px;
+    margin-left: 50px;
+}
+
+.ferramentas {
+    height: 600px;
+    color: #E0E0E0;
+    font-family: "Inter", sans-serif;
+    font-size: 30px;
+    padding: 2rem;
+
+    
+}
+
+.ferramentas nav {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    
+}
+
+.ferramentas li {
+    list-style: none;
+}
+
+.ferramentas a {
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    color: #4CAF50;
+}
+
+.ferramentas a:hover {
+    color: #E0E0E0;
+    border-color: #E0E0E0;
+    transition: all 0.3s;
+}
+
+footer {
+    padding: 1rem;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(to top, #121212, #1E1E1E);
+    color: #4CAF50;
+    text-align: center;
+}
+

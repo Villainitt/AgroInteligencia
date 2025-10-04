@@ -1,3 +1,5 @@
 rendimento_alvo,precipitacao,temperatura_max,temperatura_min,elevacao
 1,200,30,25,500
 0,100,35,30,300
+0,100,37,26,100
+0,20,40,31,250
