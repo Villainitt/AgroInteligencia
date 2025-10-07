@@ -6,7 +6,7 @@ import threading
 fnn_bp = Blueprint('fnn_bp', __name__)
 
 LOG_FILE = 'soil_data_logs.csv'  
-CSV_FIELDNAMES = ['rendimento_alvo', 'precipitacao', 'temperatura_max', 'temperatura_min', 'elevacao']
+CSV_FIELDNAMES = ['rendimento_alvo', 'precipitacao', 'temperatura_media', 'materia_organica', 'ph_solo']
 file_lock = threading.Lock()
 
 @fnn_bp.route('/log/soil_data', methods=['GET','POST'])
