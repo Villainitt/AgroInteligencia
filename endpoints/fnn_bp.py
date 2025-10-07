@@ -1,9 +1,11 @@
-import csv
+from flask import Blueprint, request, jsonify
+from tensorflow.keras.models import load_model
+import joblib
+import pandas as pd
+import numpy as np
 import os
-from flask import Blueprint, request, jsonify, render_template, flash, redirect, url_for
-import threading
 
-fnn_bp = Blueprint('fnn_bp', __name__)
+fnn_bp = Blueprint('fnn', __name__)
 
 LOG_FILE = 'soil_data_logs.csv'  
 CSV_FIELDNAMES = ['rendimento_alvo', 'precipitacao', 'temperatura_media', 'materia_organica', 'ph_solo']
@@ -38,7 +40,20 @@ def inserir_soil_data():
         finally:
             file_lock.release()
     
-        flash('Dados enviados com sucesso!')
-        return redirect(url_for('fnn_bp.inserir_soil_data'))
+@fnn_bp.route('/log/soil_data', methods=['POST'])
+def log_soil():
+    data = request.json
+    new_df = pd.DataFrame([data])
+    new_df.to_csv('data/soil_data_logs.csv', mode='a', header=False, index=False)
+    return jsonify({'status': 'dados solo salvos no CSV'})
 
-    return render_template('fnn_template.html')
+@fnn_bp.route('/predict/soil_data', methods=['POST'])
+def predict_soil():
+    if model is None or scaler is None:
+        return jsonify({'erro': 'Modelo FNN não treinado! Rode train_fnn.py primeiro.'}), 500
+    data = request.json
+    df = pd.DataFrame([data])
+    X = scaler.transform(df[['precipitacao', 'temperatura_max', 'temperatura_min', 'elevacao']])
+    pred = model.predict(X, verbose=0) [0] [0]
+    classe = 'rendimento_alto' if pred > 0.5 else 'rendimento_baixo'
+    return jsonify({'previsao': classe, 'probabilidade': float(pred)})
