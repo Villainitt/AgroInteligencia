@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificação de imagens</title>
+    <link rel="stylesheet" href="/static/style_cnn.css">
+</head>
+<body>
+    <header>
+        <h1>Classifcação de imagens</h1>
+    </header>
+    <main>
+        <h2>
+            Adicione uma imagem de folha para que o modelo faça a análise
+        </h2>
+        <div class="container_form">
+            <form id="classificacao_form">
+                <label for="imagem">Upload da imagem</label>
+                <input type="file" id="imagem" name="imagem" accept="image/png, image/jpeg">
+                <button type="button" id="btn">Classificar</button>
+            </form>
+        </div>
+        <div id="resultado_img"></div>
+    </main>
+    <footer>
+        <p>&copy; 2025 AgroData</p>
+    </footer>
+    <script src="{{ url_for('static', filename='/imagem.js') }}"></script>
+</body>
+</html>

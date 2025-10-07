@@ -1,5 +1,5 @@
 import os
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, render_template
 from werkzeug.utils import secure_filename
 import base64
 from io import BytesIO
@@ -9,10 +9,6 @@ from tensorflow.keras.models import load_model
 
 cnn_bp = Blueprint('cnn', __name__)
 
-UPLOAD_FOLDER = 'uploads'
-CLASSIFICACOES_PERMITIDAS = {'saudavel', 'doente'}
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-
 #carrega modelo
 if os.path.exists('models/model_cnn.h5'):
     model = load_model('models/model_cnn.h5')
@@ -20,7 +16,35 @@ if os.path.exists('models/model_cnn.h5'):
 else:
     model = None
     print("Aviso: Rode train_cnn.py primeiro.")
-    
+
+@cnn_bp.route('/classificador', methods = ['GET'])
+def predict_classificacao():
+    return render_template('cnn_template.html')
+
+@cnn_bp.route('/predict/leaf_image', methods=['POST'])
+def predict_leaf():
+    if model is None:
+        return jsonify({'erro': 'Modelo CNN não treinado! Rode train_cnn.py primeiro.'}), 500
+    data = request.json
+    img_b64 = data.get('image_base64', '')  # {"image_base64": "base64string"}
+    if not img_b64:  # <-- Fix: era 'img_64', agora 'img_b64'
+        return jsonify({'erro': 'Envie "image_base64": "string" no JSON'}), 400
+    try:
+        img_data = base64.b64decode(img_b64)
+        img = Image.open(BytesIO(img_data)).convert('RGB').resize((128, 128))
+        X = np.expand_dims(np.array(img) / 255.0, axis=0)
+        pred = model.predict(X, verbose=0)[0][0]
+        classe = 'saudavel' if pred < 0.5 else 'doente'
+        print(f"Previsão CNN: {classe} com prob {pred:.2f}")  # Debug no console Flask
+        return jsonify({'previsao': classe, 'probabilidade': float(pred)})
+    except Exception as e:
+        return jsonify({'erro': f'Erro ao processar imagem: {str(e)}'}), 500
+
+# log
+UPLOAD_FOLDER = 'uploads'
+CLASSIFICACOES_PERMITIDAS = {'saudavel', 'doente'}
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
 @cnn_bp.route('/log/leaf_image', methods=['POST'])
 def classificar_imagens():
     if 'classificacao' not in request.form:
@@ -51,22 +75,3 @@ def classificar_imagens():
         }), 201
     
     return jsonify({"error": "Ocorreu um erro desconhecido"}), 500
-
-@cnn_bp.route('/predict/leaf_image', methods=['POST'])
-def predict_leaf():
-    if model is None:
-        return jsonify({'erro': 'Modelo CNN não treinado! Rode train_cnn.py primeiro.'}), 500
-    data = request.json
-    img_b64 = data.get('image_base64', '')  # {"image_base64": "base64string"}
-    if not img_b64:  # <-- Fix: era 'img_64', agora 'img_b64'
-        return jsonify({'erro': 'Envie "image_base64": "string" no JSON'}), 400
-    try:
-        img_data = base64.b64decode(img_b64)
-        img = Image.open(BytesIO(img_data)).convert('RGB').resize((128, 128))
-        X = np.expand_dims(np.array(img) / 255.0, axis=0)
-        pred = model.predict(X, verbose=0)[0][0]
-        classe = 'saudavel' if pred < 0.5 else 'doente'
-        print(f"Previsão CNN: {classe} com prob {pred:.2f}")  # Debug no console Flask
-        return jsonify({'previsao': classe, 'probabilidade': float(pred)})
-    except Exception as e:
-        return jsonify({'erro': f'Erro ao processar imagem: {str(e)}'}), 500

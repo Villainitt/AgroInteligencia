@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificador de atividades</title>
+    <link rel="stylesheet" href="/static/style_rnn.css">
+</head>
+<body>
+    <header>
+        <h1>Classificador de atividades</h1>
+    </header>
+    <main>
+        <h2>Digite uma atividade para que o modelo possa classificar como urgente ou rotina</h2>
+        <div class="form-container">
+            <form id="atividade_form">
+                <label for="atividade">Descrição da atividade</label>
+                <textarea rows="5"  id="atividade" placeholder="Ex: Praga de lagartas no setor leste."></textarea>
+
+                <button type="submit">Classificar atividade</button>
+            </form>
+        </div>
+        <div id="resultado"></div>
+    </main>
+    <footer>
+         <p>&copy; 2025 AgroData</p>
+    </footer>
+    <script src="{{ url_for('static', filename='/anotacoes.js') }}"></script>
+</body>
+</html>

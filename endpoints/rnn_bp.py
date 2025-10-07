@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, render_template
 import pandas as pd
 import numpy as np
 import pickle
@@ -19,6 +19,10 @@ else:
     print("Erro: Rode train_rnn.py primeiro!")
     model = None
     tokenizer = None
+
+@rnn_bp.route('/atividades', methods = ['GET'])
+def predict_atividades():
+    return render_template('rnn_template.html')
 
 # Endpoint /log/note (já deve ter da Etapa 1, mas adicione se não)
 @rnn_bp.route('/log/note', methods=['POST'])
@@ -42,5 +46,3 @@ def predict_note():
     pred = model.predict(X, verbose=0)[0][0]
     classe = 'urgente' if pred > 0.5 else 'rotina'
     return jsonify({'previsao': classe, 'probabilidade': float(pred)})
-
-# Registre no main.py: app.register_blueprint(rnn_bp, url_prefix='/rnn')

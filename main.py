@@ -8,9 +8,9 @@ app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'uma-chave-secreta'
 
-app.register_blueprint(cnn_bp, url_prefix='/cnn')
-app.register_blueprint(fnn_bp, url_prefix='/fnn')
-app.register_blueprint(rnn_bp, url_prefix='/rnn')
+app.register_blueprint(cnn_bp)
+app.register_blueprint(fnn_bp)
+app.register_blueprint(rnn_bp)
 
 @app.route('/')
 def index():

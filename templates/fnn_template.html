@@ -10,41 +10,39 @@
 
 <body>
     <header>
-        <h1>Agro Data</h1>
+        <h1>Previsão de rendimento</h1>
     </header>
     <main>
         <img src="/static/assets/img_verde.png" alt="Fazendeira e plantação na cor verde">
         <div class="container_form">
-            <form action="/log/soil_data" method="post">
-                <div class="campos">
-                    <label for="rendimento_alvo">Rendimento alvo (1-0)</label>
-                    <input type="number" id="rendimento_alvo" name="rendimento_alvo" required>
-                </div>
+            <form id="pred_form">
                 <div class="campos">
                     <label for="precipitacao">Precipitação</label>
                     <input type="number" id="precipitacao" name="precipitacao" required>
                 </div>
                 <div class="campos">
-                    <label for="temperatura_media">Temperatura máxima (ºC)</label>
-                    <input type="number" id="temperatura_media" name="temperatura_media" required>
+                    <label for="temperatura_max">Temperatura máxima (ºC)</label>
+                    <input type="number" id="temperatura_max" name="temperatura_max" required>
                 </div>
                 <div class="campos">
-                    <label for="materia_organica">Temperatura mínima (ºC)</label>
-                    <input type="number" id="materia_organica" name="materia_organica" required>
+                    <label for="temperatura_min">Temperatura mínima (ºC)</label>
+                    <input type="number" id="temperatura_min" name="temperatura_min" required>
                 </div>
                 <div class="campos">
-                    <label for="ph_solo">Elevação</label>
-                    <input type="number" id="ph_solo" name="ph_solo" required>
+                    <label for="elevacao">Elevação</label>
+                    <input type="number" id="elevacao" name="elevacao" required>
                 </div>
 
 
-                <button type="submit">Enviar dados</button>
+                <button type="submit">Prever rendimento</button>
             </form>
         </div>
+        <div id="resultado"></div>
     </main>
     <footer>
         <p>&copy; 2025 AgroData</p>
     </footer>
+    <script src="{{ url_for('static', filename='/predict.js') }}"></script>
 
 </body>
 

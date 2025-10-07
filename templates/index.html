@@ -36,16 +36,17 @@
             <p>Selecione a ferramenta que deseja utilizar:</p>
             <nav>
                 <li>
-                    <a href="{{ url_for('fnn_bp.inserir_soil_data') }}"><i class="fa-solid fa-chart-line"></i> Ingestão
+                    <a href="{{ url_for('fnn.predict_data') }}"><i class="fa-solid fa-chart-line"></i> Classificação
                         de Dados do Solo</a>
                 </li>
                 <li>
-                    <a href="{{ url_for('cnn_bp.classificar_imagens')}}"><i class="fa-solid fa-seedling"></i>
+                    <a href="{{ url_for('cnn.predict_classificacao')}}"><i class="fa-solid fa-seedling"></i>
                         Classificador de saúde das folhagens</a>
                 </li>
                 <li>
-                    <a href=""><i class="fa-solid fa-clipboard-list"></i> Adicionar notas</a>
+                    <a href="{{ url_for('rnn.predict_atividades')}}"><i class="fa-solid fa-clipboard-list"></i> Classificador de atividades</a>
                 </li>
+                
 
             </nav>
         </section>
