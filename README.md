@@ -14,7 +14,7 @@ Acesso via navegador para análise em tempo real:
 
 ### ⚙️ Módulo API (Ingestão de Dados e Logs)
 Acesso via sistemas externos (Postman, sensores IoT) ou internamente pela aplicação web:
-* **Registro Telemétrico (FNN):** Endpoint para receber dados numéricos de solo (rendimento, precipitação, etc.) e registrá-los em `soil_data_logs.csv`.
+* **Registro Telemétrico (FNN):** Endpoint para receber dados numéricos de solo (rendimento, precipitação, ph do solo, temperatura mínima e máxima) e registrá-los em `soil_data_logs.csv`.
 * **Log de Imagens (CNN):** Endpoint para salvar imagens classificadas em pastas organizadas (`uploads/saudavel`, `uploads/doente`).
 * **Log de Notas (RNN):** Endpoint para registrar novas notas de campo no banco de dados CSV (`data/field_notes_database.csv`).
 
@@ -22,13 +22,12 @@ Acesso via sistemas externos (Postman, sensores IoT) ou internamente pela aplica
 
 ### Pré-requisitos
 * [Python 3.8+](https://www.python.org/downloads/) instalado.
-* [Git](https://git-scm.com/) (opcional, para clonar o repositório).
 
 ### 🔧 Instalação e Configuração
 
 1.  **Clone o repositório:**
     ```bash
-    git clone [https://seu-repositorio-aqui.com/agrointeligencia.git](https://seu-repositorio-aqui.com/agrointeligencia.git)
+    git clone [https://github.com/Villainitt/AgroInteligencia.git](https://github.com/Villainitt/AgroInteligencia.git)
     cd agrointeligencia
     ```
 
@@ -54,7 +53,7 @@ Acesso via sistemas externos (Postman, sensores IoT) ou internamente pela aplica
 
 1.  Com o ambiente virtual ativo, inicie o servidor Flask:
     ```bash
-    python app.py
+    python main.py
     ```
 2.  Acesse a interface web em `http://127.0.0.1:5000/`.
 
